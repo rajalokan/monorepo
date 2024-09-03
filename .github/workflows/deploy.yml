@@ -4,16 +4,16 @@ run-name: Deploying to ${{ inputs.project }}-${{ inputs.environment }} by @${{ g
 on:
   workflow_dispatch:
     inputs:
-      project:
-        required: true
-        type: choice
-        description: Choose the project to deploy
-        options:
-          - server
-          - auditing
-          - backup
-          - reporting
-          - notification
+      # project:
+      #   required: true
+      #   type: choice
+      #   description: Choose the project to deploy
+      #   options:
+      #     - server
+      #     - auditing
+      #     - backup
+      #     - reporting
+      #     - notification
       environment:
         required: true
         type: choice
@@ -27,18 +27,16 @@ on:
 
 jobs:
   server:
-    if: ${{ inputs.project == 'server'}}
     name: Server
     uses: ./.github/workflows/deploy-server.yml
     with:
       environment: ${{ inputs.environment }}
 
-  reporting:
-    if: ${{ inputs.project == 'reporting'}}
-    name: Reporting
-    uses: ./.github/workflows/deploy-reporting.yml
-    with:
-      environment: ${{ inputs.environment }}
+  # reporting:
+  #   name: Reporting
+  #   uses: ./.github/workflows/deploy-reporting.yml
+  #   with:
+  #     environment: ${{ inputs.environment }}
     
     # steps:
     #   - name: Checkout Code
