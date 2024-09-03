@@ -28,11 +28,7 @@ jobs:
           echo ${VARS_JSON}
           SERVICE_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("AWS_")))')
           echo "Printing filtered json"
-          echo ${SERVICE_ENV_JSON}
-          # # SERVICE_ENV_STR=${{ fromJson($SERVICE_ENV_JSON) }}
-          # # echo "Printing filtered string"
-          # # echo ${SERVICE_ENV_STR}          
-          # echo "SERVICE=${SERVICE_ENV_JSON}" >> $GITHUB_ENV
+          echo ${SERVICE_ENV_JSON}        
         shell: bash
 
       - name: Echo
