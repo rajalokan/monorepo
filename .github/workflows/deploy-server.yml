@@ -20,24 +20,33 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4    
 
-      - name: Setup env variables
+      - name: Setup common env variables
+        env:
+          VARS_JSON: ${{ toJSON(vars) }}
         run: |
-          echo "APP_NAME=exampleAPP" >> $GITHUB_ENV
-          echo "API_TIMEOUT=30" >> $GITHUB_ENV
+          echo "Printing all vars"
+          echo ${VARS_JSON}
+          SERVICE_ENV_JSON=$(cat ${VARS_JSON} | jq 'with_entries(select(.key | startswith("COMMON_")))')
+          echo "Printing filtered json"
+          echo ${SERVICE_ENV_JSON}
+          SERVICE_ENV_STR=fromJson(${SERVICE_ENV_JSON})
+          echo "Printing filtered string"
+          echo ${SERVICE_ENV_STR}          
+          echo "SERVICE=${SERVICE_ENV_STR}" >> $GITHUB_ENV
         shell: bash
 
       - name: Echo
         run: |
-          echo ${{ env.API_TIMEOUT }}
+          echo ${{ env.SERVICE }}
 
-      # - name: Set up common environment variables
-      #   uses: ./.github/actions/setup-env
+      # # - name: Set up common environment variables
+      # #   uses: ./.github/actions/setup-env
       
-      - name: Dump vars context
-        env:
-          VARS_JSON: ${{ toJSON(env) }}
-        run: |
-          echo "${VARS_JSON}"    
+      # - name: Dump vars context
+      #   env:
+      #     VARS_JSON: ${{ toJSON(env) }}
+      #   run: |
+      #     echo "${VARS_JSON}"    
 
       # - name: Configure AWS credentials
       #   run: echo "Assuming role ${{ vars.AWS_ACCOUNT_ID }}:role/${{ vars.AWS_ROLE_NAME }} in ${{ vars.AWS_REGION }}"
