@@ -37,7 +37,7 @@ jobs:
 
       - name: Echo
         run: |
-          echo ${{ SERVICE }}          
+          echo ${SERVICE}
         env:
           SERVICE: ${{ fromJson(env.SERVICE) }}
 
