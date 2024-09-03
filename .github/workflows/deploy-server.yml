@@ -37,7 +37,7 @@ jobs:
 
       - name: Echo
         run: |
-          echo ${env_vars.AWS_ACCOUNT_ID}
+          echo ${env_vars}
         env:
           env_vars: ${{ fromJson(env.SERVICE) }}
 
