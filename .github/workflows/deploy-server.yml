@@ -11,6 +11,8 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    environment:
+      name: "server-${{ inputs.environment }}"
     defaults:
       run:
         shell: bash
@@ -25,7 +27,7 @@ jobs:
         run: echo "Login to AWS ECR"
         
       - name: Debug
-        run: echo ${{ secrets.password }}
+        run: echo "${{ secrets.password }}"
 
       - name: Build, tag, and push
         run: |
