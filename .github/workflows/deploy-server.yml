@@ -1,4 +1,4 @@
-name: Server
+name: {{ inputs.environment }}
 
 on:
   workflow_call:
