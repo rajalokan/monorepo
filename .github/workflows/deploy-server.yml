@@ -18,20 +18,17 @@ jobs:
         shell: bash
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4    
+
+      - name: Set up common environment variables
+        uses: ./.github/actions/setup-env
       
       - name: Dump vars context
         env:
           VARS_JSON: ${{ toJSON(vars) }}
         run: |
           echo "${VARS_JSON}"
-          echo ${{ vars }}
-
-      - name: Set up common environment variables
-        uses: ./.github/actions/setup-env
-
-      - name: Debug
-        run: echo "Debug"
+          echo ${{ vars }}        
 
       # - name: Configure AWS credentials
       #   run: echo "Assuming role ${{ vars.AWS_ACCOUNT_ID }}:role/${{ vars.AWS_ROLE_NAME }} in ${{ vars.AWS_REGION }}"
