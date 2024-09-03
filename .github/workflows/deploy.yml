@@ -37,6 +37,8 @@ jobs:
     if: ${{ inputs.project == 'reporting'}}
     name: Reporting
     uses: ./.github/workflows/deploy-reporting.yml
+    with:
+      environment: ${{ inputs.environment }}
     
     # steps:
     #   - name: Checkout Code
