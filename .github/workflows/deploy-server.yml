@@ -37,10 +37,9 @@ jobs:
 
       - name: Echo
         run: |
-          echo ${{ env_vars.AWS_ACCOUNT_ID }}
-          echo ${{ env_vars.AWS_ROLE_NAME }}
+          echo ${{ env_vars }}          
         env:
-          env_vars: ${{ env.SERVICE }}
+          env_vars: ${{ fromJson(env.SERVICE) }}
 
       # # - name: Set up common environment variables
       # #   uses: ./.github/actions/setup-env
