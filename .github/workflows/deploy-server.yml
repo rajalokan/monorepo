@@ -14,5 +14,20 @@ jobs:
       run:
         shell: bash
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        run: echo "Assuming role ${{ vars.AWS_ACCOUNT_ID }}:role/{{ vars.AWS_ROLE_NAME }} in ${{ vars.AWS_REGION }}"
+
+      - name: Login to Amazon ECR
+        run: echo "Login to AWS ECR"
+        
       - name: Debug
         run: echo ${{ secrets.password }}
+
+      - name: Build, tag, and push
+        run: |
+          echo "docker build -t foo/foo ."
+          echo "docker push"          
+        
