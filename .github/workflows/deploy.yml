@@ -10,8 +10,10 @@ on:
         description: Choose the project to deploy
         options:
           - server
-          - reporting
           - auditing
+          - backup
+          - reporting
+          - notification
       environment:
         required: true
         type: choice
@@ -24,17 +26,16 @@ on:
         default: "dev"
 
 jobs:
-  deploy:
-    name: Deploy
-
-    # environment:
-    #   name: "${{ inputs.project }}-${{ inputs.environment }}"
+  server:
+    if: ${{ inputs.project == 'server'}}
+    name: Server
     uses: ./.github/workflows/deploy-server.yml
-    
-    # runs-on: ubuntu-latest
-    # env:
-    #   IMAGE_TAG: ${{ inputs.tag_name || github.sha }}
 
+  reporting:
+    if: ${{ inputs.project == 'reporting'}}
+    name: Reporting
+    uses: ./.github/workflows/deploy-reporting.yml
+    
     # steps:
     #   - name: Checkout Code
     #     uses: actions/checkout@v4        
