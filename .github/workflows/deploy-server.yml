@@ -37,9 +37,9 @@ jobs:
 
       - name: Echo
         run: |
-          echo ${{ env_vars }}          
+          echo ${{ SERVICE }}          
         env:
-          env_vars: ${{ fromJson(env.SERVICE) }}
+          SERVICE: ${{ fromJson(env.SERVICE) }}
 
       # # - name: Set up common environment variables
       # #   uses: ./.github/actions/setup-env
