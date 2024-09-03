@@ -11,9 +11,31 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    environment:
+      name: "reporting-${{ inputs.environment }}"
     defaults:
       run:
         shell: bash
     steps:
-      - name: Debug
-        run: echo ${{ secrets.password }}
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        run: echo "Assuming role ${{ vars.AWS_ACCOUNT_ID }}:role/{{ vars.AWS_ROLE_NAME }} in ${{ vars.AWS_REGION }}"
+
+      - name: Login to Amazon ECR
+        run: echo "Login to AWS ECR"
+
+      - name: Build, tag, and push image to ECR
+        env:
+          REGISTRY: rajalokan
+          REPOSITORY: ${{ vars.APP_NAME }}-reporting-${{ inputs.environment }}
+        run: |
+          echo "docker build -t $REGISTRY/$REPOSITORY:latest nginx/"
+          echo "docker push $REGISTRY/$REPOSITORY:latest"        
+      
+      - name: Update ECS Task Definition
+        run: |
+          echo "aws ecs describe-task-definition \
+            --task-definition ${{ vars.APP_NAME }}-reporting-${{ inputs.environment }} \
+            --region ${{ vars.AWS_REGION }}"           
