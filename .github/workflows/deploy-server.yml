@@ -26,7 +26,8 @@ jobs:
         run: |
           echo "Printing all vars"
           echo ${VARS_JSON}
-          SERVICE_ENV_JSON=$(cat ${VARS_JSON} | jq 'with_entries(select(.key | startswith("COMMON_")))')
+          SERVICE_ENV_JSON=$(cat ${VARS_JSON})
+          # | jq 'with_entries(select(.key | startswith("COMMON_")))')
           echo "Printing filtered json"
           echo ${SERVICE_ENV_JSON}
           SERVICE_ENV_STR=fromJson(${SERVICE_ENV_JSON})
