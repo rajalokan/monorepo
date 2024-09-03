@@ -50,6 +50,8 @@ jobs:
       
       - name: Update ECS Service
         run: |
-          echo "aws ecs describe-task-definition \
-            --task-definition ${{ vars.APP_NAME }}-${{ inputs.environment }} \
-            --region ${{ vars.AWS_REGION }}"
+          echo "aws ecs update-service \
+            --cluster ${{ vars.APP_NAME }}-${{ env.CLUSTER_ENV }}${{ vars.CLUSTER_SUFFIX }} \
+            --service ${{ vars.APP_NAME }}-${{ inputs.environment }} \
+            --task-definition ${{ vars.APP_NAME }}-${{ inputs.environment }}:${{ env.TASK_REVISION }} \
+            --desired-count 4"          
