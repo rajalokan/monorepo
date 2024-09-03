@@ -1,5 +1,5 @@
 name: Deploy
-run-name: Deploy to ${{ inputs.project }} / ${{ inputs.environment }} by @${{ github.actor }}
+run-name: Deploy to ${{ inputs.project }}-${{ inputs.environment }} by @${{ github.actor }}
 
 on:
   workflow_dispatch:
@@ -9,9 +9,9 @@ on:
         type: choice
         description: Choose the project to deploy
         options:
-          - Server
-          - Reporting
-          - Auditing
+          - server
+          - reporting
+          - auditing
       environment:
         required: true
         type: choice
@@ -28,7 +28,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     environment:
-      name: "${{ inputs.project }} - ${{ inputs.environment }}"
+      name: "${{ inputs.project }}-${{ inputs.environment }}"
     env:
       IMAGE_TAG: ${{ inputs.tag_name || github.sha }}
 
