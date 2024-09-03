@@ -25,12 +25,31 @@ jobs:
 
       - name: Login to Amazon ECR
         run: echo "Login to AWS ECR"
-        
-      - name: Debug
-        run: echo "${{ secrets.password }}"
 
-      - name: Build, tag, and push
+      - name: Build, tag, and push sidecar image to ECR
+        env:
+          REGISTRY: rajalokan
+          REPOSITORY: ${{ vars.APP_NAME }}-nginx-${{ inputs.environment }}
         run: |
-          echo "docker build -t foo/foo ."
-          echo "docker push"          
-        
+          echo "docker build -t $REGISTRY/$REPOSITORY:latest nginx/"
+          echo "docker push $REGISTRY/$REPOSITORY:latest"
+          
+      - name: Build, tag, and push app image to ECR
+        env:
+          REGISTRY: rajalokan
+          REPOSITORY: ${{ vars.APP_NAME }}-web-app-${{ inputs.environment }}
+        run: |
+          echo "docker build -t $REGISTRY/$REPOSITORY:latest nginx/"
+          echo "docker push $REGISTRY/$REPOSITORY:latest"          
+      
+      - name: Update ECS Task Definition
+        run: |
+          echo "aws ecs describe-task-definition \
+            --task-definition ${{ vars.APP_NAME }}-${{ inputs.environment }} \
+            --region ${{ vars.AWS_REGION }}"
+      
+      - name: Update ECS Service
+        run: |
+          echo "aws ecs describe-task-definition \
+            --task-definition ${{ vars.APP_NAME }}-${{ inputs.environment }} \
+            --region ${{ vars.AWS_REGION }}"
