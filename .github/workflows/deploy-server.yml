@@ -23,7 +23,9 @@ jobs:
       - name: Dump vars context
         env:
           VARS_JSON: ${{ toJSON(vars) }}
-        run: echo "${VARS_JSON}"
+        run: |
+          echo "${VARS_JSON}"
+          echo ${{ vars }}
 
       - name: Set up common environment variables
         uses: ./.github/actions/setup-env
