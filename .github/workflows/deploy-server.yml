@@ -27,8 +27,7 @@ jobs:
         env:
           VARS_JSON: ${{ toJSON(vars) }}
         run: |
-          echo "${VARS_JSON}"
-          echo ${{ vars }}        
+          echo "${VARS_JSON}"    
 
       # - name: Configure AWS credentials
       #   run: echo "Assuming role ${{ vars.AWS_ACCOUNT_ID }}:role/${{ vars.AWS_ROLE_NAME }} in ${{ vars.AWS_REGION }}"
