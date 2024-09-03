@@ -28,7 +28,7 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     environment:
-      name: ${{ inputs.environment }}
+      name: "${{ inputs.project }} - ${{ inputs.environment }}"
     env:
       IMAGE_TAG: ${{ inputs.tag_name || github.sha }}
 
