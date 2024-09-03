@@ -1,5 +1,5 @@
 name: Deploy
-run-name: Deploy to ${{ inputs.project }} - ${{ inputs.environment }} by @${{ github.actor }}
+run-name: Deploy to ${{ inputs.project }}/${{ inputs.environment }} by @${{ github.actor }}
 
 on:
   workflow_dispatch:
@@ -35,3 +35,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4        
+
+      - name: Deploy
+        run: |
+          echo "Deploying to ${{ vars.APP_NAME }}-${{ inputs.environment }}
