@@ -20,12 +20,22 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4    
 
-      - name: Set up common environment variables
-        uses: ./.github/actions/setup-env
+      - name: Setup env variables
+        run: |
+          echo "APP_NAME=exampleAPP" >> $GITHUB_ENV
+          echo "API_TIMEOUT=30" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Echo
+        run: |
+          echo ${{ env.API_TIMEOUT }}
+
+      # - name: Set up common environment variables
+      #   uses: ./.github/actions/setup-env
       
       - name: Dump vars context
         env:
-          VARS_JSON: ${{ toJSON(GITHUB_ENV) }}
+          VARS_JSON: ${{ toJSON(env) }}
         run: |
           echo "${VARS_JSON}"    
 
