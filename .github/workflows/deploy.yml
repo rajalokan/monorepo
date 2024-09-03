@@ -30,6 +30,8 @@ jobs:
     if: ${{ inputs.project == 'server'}}
     name: Server
     uses: ./.github/workflows/deploy-server.yml
+    with:
+      environment: ${{ inputs.environment }}
 
   reporting:
     if: ${{ inputs.project == 'reporting'}}
