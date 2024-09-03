@@ -1,0 +1,37 @@
+name: Deploy
+run-name: Deploy to ${{ inputs.project }} - ${{ inputs.environment }} by @${{ github.actor }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      project:
+        required: true
+        type: choice
+        description: Choose the project to deploy
+        options:
+          - Server
+          - Reporting
+          - Auditing
+      environment:
+        required: true
+        type: choice
+        description: "The target environment for deployment"
+        options:
+          - dev
+          - staging
+          - test
+          - production
+        default: "dev"
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment }}
+    env:
+      IMAGE_TAG: ${{ inputs.tag_name || github.sha }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4        
