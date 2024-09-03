@@ -29,7 +29,7 @@ jobs:
 
     # environment:
     #   name: "${{ inputs.project }}-${{ inputs.environment }}"
-    uses: ./.github/workflows/deploy-${{ inputs.project }}.yml
+    uses: ./.github/workflows/deploy-server.yml
     
     # runs-on: ubuntu-latest
     # env:
