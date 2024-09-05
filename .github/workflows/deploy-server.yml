@@ -20,24 +20,30 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4    
 
-      - name: Setup common env variables
-        env:
-          VARS_JSON: ${{ toJSON(vars) }}
-        run: |
-          echo "Printing all vars"
-          echo ${VARS_JSON}
-          SERVICE_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("AWS_")))')
-          echo "Printing filtered json"
-          echo ${SERVICE_ENV_JSON}          
-          SERVICE_ENV_STR=$(echo ${SERVICE_ENV_JSON} | jq -c | jq -R)
-          echo "Printing filtered string"
-          echo ${SERVICE_ENV_STR} 
-          echo "SERVICE=${SERVICE_ENV_STR}" >> $GITHUB_ENV
-        shell: bash
+      # - name: Setup common env variables
+      #   env:
+      #     VARS_JSON: ${{ toJSON(vars) }}
+      #   run: |
+      #     echo "Printing all vars"
+      #     echo ${VARS_JSON}
+      #     SERVICE_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("AWS_")))')
+      #     echo "Printing filtered json"
+      #     echo ${SERVICE_ENV_JSON}          
+      #     SERVICE_ENV_STR=$(echo ${SERVICE_ENV_JSON} | jq -c | jq -R)
+      #     echo "Printing filtered string"
+      #     echo ${SERVICE_ENV_STR} 
+      #     echo "SERVICE=${SERVICE_ENV_STR}" >> $GITHUB_ENV
+      #   shell: bash
 
-      - name: Echo
+      - name: Print all env variables
+        env:
+          ENV_VARS: ${{ toJSON(env) }}
         run: |
-          echo ${SERVICE}
+          echo ${ENV_VARS}
+
+      # - name: Echo
+      #   run: |
+      #     echo ${SERVICE}
 
       # # - name: Set up common environment variables
       # #   uses: ./.github/actions/setup-env
