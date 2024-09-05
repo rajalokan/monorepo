@@ -34,7 +34,7 @@ jobs:
           echo ${VARS_JSON}
           SERVICE_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("AWS_")))')
 
-          echo ${SERVICE_ENV_JSON} | jq -c 'to_entries[][]' | while read -r key; do
+          echo ${SERVICE_ENV_JSON} | jq -r 'to_entries[][]' | while read -r key; do
             read -r value
             echo "$key=$value" >> $GITHUB_ENV
           done          
@@ -46,9 +46,9 @@ jobs:
         run: |
           echo ${ENV_VARS}
 
-      # - name: Echo
-      #   run: |
-      #     echo ${SERVICE}
+      - name: Echo
+        run: |
+          echo env.AWS_ACCOUNT_ID
 
       # # - name: Set up common environment variables
       # #   uses: ./.github/actions/setup-env
