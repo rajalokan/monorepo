@@ -13,14 +13,10 @@ runs:
   using: 'composite'
   steps:    
     - name: Setup service env variables                          
-      run: |                  
-        VARS_OBJ=${{ fromJson(inputs.vars_json) }}
+      run: |                          
+        VARS_JSON=${{ toJson(${{ fromJson(inputs.vars_json) }}) }}
+        echo $VARS_JSON
         
-        echo "$VARS_OBJ"
-
-        VARS_JSON=${{ toJson($VARS_OBJ) }}
-        
-
         
         
         
