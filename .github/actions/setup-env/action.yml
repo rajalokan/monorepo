@@ -3,7 +3,7 @@ description: 'Sets up environment variables for all jobs'
 
 inputs:
   vars_json:
-    description: 'Vars as JSON. Recommended to be ${{ toJSON(vars) }}'
+    description: 'Vars as JSON.'
     required: true
   service_name:
     description: 'Name of the service'
