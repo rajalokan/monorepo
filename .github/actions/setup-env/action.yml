@@ -15,7 +15,7 @@ runs:
     - name: Setup service env variables               
       run: |          
         echo "${{ inputs.vars_json }}"
-        VARS_JSON=toJson(${{ inputs.vars.json }})
+        VARS_JSON=fromJson(${{ inputs.vars.json }})
         echo ${VARS_JSON}
         
         # echo "Setting common variables"
