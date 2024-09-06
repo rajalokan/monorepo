@@ -1,11 +1,18 @@
 name: 'Set Up Environment Variables'
 description: 'Sets up environment variables for all jobs'
+
+inputs:
+  vars_json:
+    description: 'Vars as JSON. Recommended to be ${{ toJSON(vars) }}'
+    required: true
+  service_name:
+    description: 'Name of the service'
+    required: true
+    
 runs:
   using: 'composite'
   steps:    
-    - name: Setup service env variables
-      env:
-        VARS_JSON: ${{ toJSON(vars) }}
+    - name: Setup service env variables      
       run: |          
         echo "Setting common variables"
         COMMON_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("COMMON_")))')
