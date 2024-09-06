@@ -18,7 +18,7 @@ runs:
         echo ${VARS_JSON}
         
         echo "Setting common variables"
-        COMMON_ENV_JSON=$(echo ${VARS_JSON})
+        COMMON_ENV_JSON=$(echo ${VARS_JSON} | jq -r '.')
       
         # COMMON_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("COMMON_")))')
 
