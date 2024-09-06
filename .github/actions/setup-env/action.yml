@@ -14,9 +14,9 @@ runs:
   steps:    
     - name: Setup service env variables   
       env:
-        VARS_JSON=${{ inputs.vars_json }}
+        VARS_JSON=${{ fromJson(inputs.vars_json) }}        
       run: |          
-        echo ${vars_json}
+        echo ${VARS_JSON}
         
         echo "Setting common variables"
         COMMON_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("COMMON_")))')
