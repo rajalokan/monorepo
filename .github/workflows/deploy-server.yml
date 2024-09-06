@@ -29,7 +29,8 @@ jobs:
       - name: Set up service level environment variables
         uses: ./.github/actions/setup-env
         with:
-          name: SERVER        
+          vars_json: ${{ toJson(vars) }}
+          service_name: SERVER        
           
       - name: Print all env variables
         env:
