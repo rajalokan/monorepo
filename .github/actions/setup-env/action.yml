@@ -14,8 +14,10 @@ runs:
   steps:    
     - name: Setup service env variables      
       run: |          
+        echo ${vars_json}
+        
         echo "Setting common variables"
-        COMMON_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("COMMON_")))')
+        COMMON_ENV_JSON=$(echo ${vars_json} | jq 'with_entries(select(.key | startswith("COMMON_")))')
 
         echo ${COMMON_ENV_JSON} | jq -r 'to_entries[][]' | while read -r key; do
           read -r value
@@ -23,7 +25,7 @@ runs:
         done          
 
         echo "Setting service variables"
-        SERVICE_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("SERVER_")))')
+        SERVICE_ENV_JSON=$(echo ${vars_json} | jq 'with_entries(select(.key | startswith("SERVER_")))')
 
         echo ${SERVICE_ENV_JSON} | jq -r 'to_entries[][]' | while read -r key; do
           read -r value
