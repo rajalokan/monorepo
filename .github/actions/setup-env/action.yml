@@ -16,7 +16,10 @@ runs:
       run: |                  
         VARS_OBJ=${{ fromJson(inputs.vars_json) }}
         
-        echo $VARS_OBJ
+        echo "$VARS_OBJ"
+
+        VARS_JSON=${{ toJson($VARS_OBJ) }}
+        
 
         
         
