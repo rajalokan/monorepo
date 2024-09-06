@@ -29,16 +29,21 @@ jobs:
       - name: Setup service env variables
         env:
           VARS_JSON: ${{ toJSON(vars) }}
-        run: |
-          # echo "Printing all vars"
-          # echo ${VARS_JSON}
+        run: |          
           echo "Setting common variables"
-          SERVICE_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("COMMON_")))')
+          COMMON_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("COMMON_")))')
+
+          echo ${COMMON_ENV_JSON} | jq -r 'to_entries[][]' | while read -r key; do
+            read -r value
+            echo "${key#'COMMON_'}=${value}" >> $GITHUB_ENV            
+          done          
+
+          echo "Setting service variables"
+          SERVICE_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("SERVER_")))')
 
           echo ${SERVICE_ENV_JSON} | jq -r 'to_entries[][]' | while read -r key; do
             read -r value
-            echo "${key#'COMMON_'}"
-            echo "$key=$value" >> $GITHUB_ENV
+            echo "${key#'COMMON_'}=${value}" >> $GITHUB_ENV            
           done          
         shell: bash
 
