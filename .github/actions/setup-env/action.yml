@@ -14,7 +14,7 @@ runs:
   steps:    
     - name: Setup service env variables                          
       run: |                  
-        VARS_JSON=${{ toJson(fromJson(inputs.vars_json)) }}
+        VARS_JSON=${{ toJson(${{ fromJson(inputs.vars_json) }}) }}
         echo ${VARS_JSON}                
         
         echo "Setting common variables"              
