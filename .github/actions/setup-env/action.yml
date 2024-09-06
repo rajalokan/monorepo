@@ -19,7 +19,7 @@ runs:
         
         echo "Setting common variables"
         # COMMON_ENV_JSON=$(echo ${VARS_JSON} | jq -r '.')
-        echo "AWS_FOO=foo" >> $GITHUB_ENV
+        echo "AWS_ACCOUNT_ID=foo" >> $GITHUB_ENV
       
         # COMMON_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("COMMON_")))')
 
