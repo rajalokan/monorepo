@@ -35,7 +35,7 @@ jobs:
       - name: Stringfy
         id: stringify
         run: |
-          echo "vars_json=$(echo ${ENV_VARS} | jq -R" >> "$GITHUB_OUTPUT"
+          echo "vars_json=$(echo ${ENV_VARS} | jq -R)" >> "$GITHUB_OUTPUT"
 
       - name: Read
         run: |
