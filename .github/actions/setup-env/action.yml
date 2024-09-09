@@ -23,9 +23,10 @@ runs:
       shell: bash
       run: |
         VARS_OBJ="${{ inputs.vars_json }}"
-        for key in "${!VARS_OBJ[@]}"; do
-          echo "$key"
-        done
+        VARS_JSON=${{ toJSON($VARS_OBJ) }}
+        # for key in "${!VARS_OBJ[@]}"; do
+        #   echo "$key"
+        # done
       
     # - name: Setup service env variables       
     #   shell: bash
