@@ -22,7 +22,7 @@ runs:
       id: vars
       shell: bash
       run: |        
-        VARS_OBJ=${{ fromJSON(toJSON(inputs.vars_json)) }}
+        VARS_OBJ=${{ toJSON(inputs.vars_json) }}
         # VARS_JSON=$(echo $VARS_OBJ | jq -c)
         echo $VARS_OBJ
         
