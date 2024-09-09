@@ -29,7 +29,7 @@ runs:
         done          
 
         echo "Setting service variables"
-        prefix="${service_name}"_
+        prefix=${{ inputs.service_name }} + "_"
         echo "Filtering by $prefix"
         SERVICE_ENV_JSON=$(echo ${VARS_JSON} | jq --arg PREFIX ${prefix} 'with_entries(select(.key | startswith($PREFIX)))')
 
