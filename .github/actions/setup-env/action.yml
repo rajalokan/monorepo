@@ -22,15 +22,8 @@ runs:
       id: vars
       shell: bash
       run: |        
-        VARS_TO=${{ toJSON(inputs.vars_json) }}
-        echo $VARS_TO | tr -d " " 
-
-        VARS_1=$(echo $VARS_TO | tr -d " ")
-        echo $VARS_1
-
-        VARS_2=$(echo $VARS_1 | tr -d "\n")
-        echo $VARS_2
-
+        VARS_TO='${{ toJSON(inputs.vars_json) }}'
+        echo "${VARS_TO}"
         # echo $VARS_TO | tr -d ' ' | tr -d '\\n' | sed 's/\\"/"/g | jq -r '.'        
         
         # VARS_JSON=$(echo $VARS_OBJ | jq -c)
