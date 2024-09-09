@@ -22,10 +22,7 @@ runs:
       id: vars
       shell: bash
       run: |
-        echo "${{ inputs.vars_json }} | while read -r key; do
-          echo $key
-        done
-        # echo "ENV_VARS=${{ inputs.vars_json }}" >> "${GITHUB_OUTPUT}"
+        echo ${{ fromJSON(inputs.vars_json) }}          
       
     # - name: Setup service env variables       
     #   shell: bash
