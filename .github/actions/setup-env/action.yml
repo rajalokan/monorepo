@@ -22,7 +22,7 @@ runs:
       id: vars
       shell: bash
       run: |
-        echo ${{ inputs.vars_json }}
+        echo "${{ inputs.vars_json }}"
         # echo "ENV_VARS=${{ inputs.vars_json }}" >> "${GITHUB_OUTPUT}"
       
     # - name: Setup service env variables       
