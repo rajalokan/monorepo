@@ -30,7 +30,16 @@ jobs:
         env:
           ENV_VARS: ${{ toJSON(vars) }}
         run: |
-          echo ${ENV_VARS}      
+          echo ${ENV_VARS}     
+
+      - name: Stringfy
+        id: stringify
+        run: |
+          echo "vars_json=$(echo ${ENV_VARS} | jq -R" >> "$GITHUB_OUTPUT"
+
+      - name: Read
+        run: |
+          echo ${{ steps.stringify.outputs.vars_json }}
           
       - name: Set up service level environment variables
         uses: ./.github/actions/setup-env
