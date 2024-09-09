@@ -22,16 +22,16 @@ runs:
         COMMON_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("COMMON_")))')
 
         echo $COMMON_ENV_JSON
-        # echo ${COMMON_ENV_JSON} | jq -r 'to_entries[][]' | while read -r key; do
-        #   read -r value
-        #   echo "${key#'COMMON_'}=${value}" >> $GITHUB_ENV            
-        # done          
+        echo ${COMMON_ENV_JSON} | jq -r 'to_entries[][]' | while read -r key; do
+          read -r value
+          echo "${key#'COMMON_'}=${value}" >> $GITHUB_ENV            
+        done          
 
-    #     # echo "Setting service variables"
-    #     # SERVICE_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("SERVER_")))')
+        echo "Setting service variables"
+        SERVICE_ENV_JSON=$(echo ${VARS_JSON} | jq 'with_entries(select(.key | startswith("SERVER_")))')
 
-    #     # echo ${SERVICE_ENV_JSON} | jq -r 'to_entries[][]' | while read -r key; do
-    #     #   read -r value
-    #     #   echo "${key#'SERVER_'}=${value}" >> $GITHUB_ENV            
-    #     # done        
+        echo ${SERVICE_ENV_JSON} | jq -r 'to_entries[][]' | while read -r key; do
+          read -r value
+          echo "${key#'SERVER_'}=${value}" >> $GITHUB_ENV            
+        done        
       
