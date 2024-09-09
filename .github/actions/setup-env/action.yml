@@ -12,11 +12,11 @@ inputs:
 runs:
   using: 'composite'
   steps:    
-    - name: Print all vars
-        env:
-          ENV_VARS: ${{ toJSON(vars) }}
-        run: |
-          echo ${ENV_VARS}
+    # - name: Print all vars
+    #     env:
+    #       ENV_VARS: ${{ toJSON(vars) }}
+    #     run: |
+    #       echo ${ENV_VARS}
 
     - name: Read vars
       id: vars
