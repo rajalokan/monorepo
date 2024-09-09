@@ -30,18 +30,13 @@ jobs:
         env:
           ENV_VARS: ${{ toJSON(vars) }}
         run: |
-          echo ${ENV_VARS}
-      - run: echo "GR=$GITHUB_REF"  >> $GITHUB_ENV
-
-      - name: debug
-        run: |
-          echo ${{ env.GR }}
+          echo ${ENV_VARS}      
           
-      # - name: Set up service level environment variables
-      #   uses: ./.github/actions/setup-env
-      #   with:
-      #     vars_json: ${{ toJSON(vars) }}
-      #     service_name: SERVER        
+      - name: Set up service level environment variables
+        uses: ./.github/actions/setup-env
+        with:
+          vars_json: ${{ toJSON(vars) }}
+          service_name: SERVER        
           
       - name: Print all env variables
         env:
