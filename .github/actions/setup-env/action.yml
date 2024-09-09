@@ -23,7 +23,7 @@ runs:
       shell: bash
       run: |
         VARS_OBJ="${{ inputs.vars_json }}"
-        VARS_JSON=${{ toJSON($VARS_OBJ) }}
+        VARS_JSON=${{ toJSON(inputs.vars_json) }}
         # for key in "${!VARS_OBJ[@]}"; do
         #   echo "$key"
         # done
