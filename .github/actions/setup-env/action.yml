@@ -21,10 +21,11 @@ runs:
     - name: Read vars
       id: vars
       shell: bash
-      run: |
-        VARS_OBJ="${{ inputs.vars_json }}"
-        VARS_JSON=${{ toJSON(inputs.vars_json) }}
+      run: |        
+        VARS_OBJ=${{ toJSON(inputs.vars_json) }}
+        VARS_JSON=$(echo $VARS_OBJ | jq -c)
         echo $VARS_JSON
+        
         # for key in "${!VARS_OBJ[@]}"; do
         #   echo "$key"
         # done
