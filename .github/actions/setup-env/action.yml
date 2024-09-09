@@ -22,7 +22,7 @@ runs:
       id: vars
       shell: bash
       run: |        
-        VARS_JSON="${{ inputs.vars_json }}"
+        VARS_JSON=${{ inputs.vars_json }}
         echo ${VARS_JSON}
         # echo $VARS_TO | tr -d ' ' | tr -d '\\n' | sed 's/\\"/"/g | jq -r '.'        
         
