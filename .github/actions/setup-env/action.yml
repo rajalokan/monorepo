@@ -17,7 +17,8 @@ runs:
         VARS_OBJ=${{ fromJson(inputs.vars_json) }}
         echo $VARS_OBJ
 
-        VARS_JSON=${{ toJSON($VARS_OBJ) }}
+        VARS_JSON=${{ inputs.vars_json }}
+        echo $VARS_JSON
                               
         # echo "Setting common variables"              
         # COMMON_ENV_JSON=$(echo $VARS_JSON | jq 'with_entries(select(.key | startswith("COMMON_")))')
