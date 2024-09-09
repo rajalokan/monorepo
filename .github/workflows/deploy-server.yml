@@ -28,14 +28,14 @@ jobs:
 
       - name: Print all vars
         env:
-          ENV_VARS: ${{ vars | jq -c | jq R }}
+          ENV_VARS: ${{ toJSON(vars) }}
         run: |
           echo ${ENV_VARS}
           
       - name: Set up service level environment variables
         uses: ./.github/actions/setup-env
         with:
-          vars_json: ${{ vars | jq -c | jq R }}
+          ENV_VARS: ${{ toJSON(vars) }}
           service_name: SERVER        
           
       - name: Print all env variables
