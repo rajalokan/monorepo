@@ -26,7 +26,7 @@ runs:
         echo $VARS_TO
 
         VARS_FROM=${{ fromJSON(inputs.vars_json) }}
-        echo $VARS_FROM
+        echo "$VARS_FROM"
         
         # VARS_JSON=$(echo $VARS_OBJ | jq -c)
         # echo "$VARS_OBJ" | tr -d ' ' | tr -d '\n'
