@@ -12,12 +12,26 @@ inputs:
 runs:
   using: 'composite'
   steps:    
+    - name: Print all vars
+        env:
+          ENV_VARS: ${{ toJSON(vars) }}
+        run: |
+          echo ${ENV_VARS}
+
+    - name: Read vars
+      id: vars
+      shell: bash
+      run: |
+        echo "ENV_VARS=${{ inputs.vars_json }}" >> "${GITHUB_OUTPUT}"
+      
     - name: Setup service env variables       
+      shell: bash
       run: |                          
-        VARS_OBJ=${{ fromJson(inputs.vars_json) }}
-        echo $VARS_OBJ
+        echo ${{ steps.vars.outputs.ENV_VARS }}
+        # VARS_OBJ=${{ fromJson(inputs.vars_json) }}
+        # echo $VARS_OBJ
         
-        echo "${{ inputs.vars_json }}"        
+        # echo "${{ inputs.vars_json }}"        
                               
         # echo "Setting common variables"              
         # COMMON_ENV_JSON=$(echo $VARS_JSON | jq 'with_entries(select(.key | startswith("COMMON_")))')
@@ -35,4 +49,4 @@ runs:
         #   read -r value
         #   echo "${key#'SERVER_'}=${value}" >> $GITHUB_ENV            
         # done        
-      shell: bash
+      
