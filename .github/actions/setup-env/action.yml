@@ -17,7 +17,7 @@ runs:
         VARS_OBJ=${{ fromJson(inputs.vars_json) }}
         echo $VARS_OBJ
 
-        VARS_JSON="${{ inputs.vars_json }}"
+        VARS_JSON=$inputs.vars_json
         echo $VARS_JSON
                               
         # echo "Setting common variables"              
