@@ -22,7 +22,7 @@ runs:
       id: vars
       shell: bash
       run: |        
-        VARS_OBJ=${{ toJSON(froJSON(inputs.vars_json)) }}
+        VARS_OBJ=${{ toJSON(fromJSON(inputs.vars_json)) }}
         echo $VARS_OBJ
         # VARS_JSON=$(echo $VARS_OBJ | jq -c)
         # echo "$VARS_OBJ" | tr -d ' ' | tr -d '\n'
