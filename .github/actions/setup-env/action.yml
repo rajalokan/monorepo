@@ -12,13 +12,15 @@ inputs:
 runs:
   using: 'composite'
   steps:    
-    - name: Setup service env variables                          
+    - name: Setup service env variables 
+      env:
+        VARS_JSON = ${{ fromJSON(inputs.vars_json) }}
       run: |                          
-        VARS_OBJ=${{ fromJson(inputs.vars_json) }}
-        echo $VARS_OBJ
+        # VARS_OBJ=${{ fromJson(inputs.vars_json) }}
+        # echo $VARS_OBJ
 
-        VARS_JSON=$inputs.vars_json
-        echo $VARS_JSON
+        # VARS_JSON=$inputs.vars_json
+        echo {{ VARS_JSON }}
                               
         # echo "Setting common variables"              
         # COMMON_ENV_JSON=$(echo $VARS_JSON | jq 'with_entries(select(.key | startswith("COMMON_")))')
