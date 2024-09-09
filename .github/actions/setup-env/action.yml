@@ -22,7 +22,10 @@ runs:
       id: vars
       shell: bash
       run: |
-        echo ${{ fromJSON(inputs.vars_json) }}          
+        VARS_OBJ=${{ fromJSON(inputs.vars_json) }}      
+        for key in "${!VARS_OBJ[@]}"; do
+          echo "$key"
+        done
       
     # - name: Setup service env variables       
     #   shell: bash
