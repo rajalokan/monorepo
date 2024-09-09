@@ -24,6 +24,7 @@ runs:
       run: |
         VARS_OBJ="${{ inputs.vars_json }}"
         VARS_JSON=${{ toJSON(inputs.vars_json) }}
+        echo $VARS_JSON
         # for key in "${!VARS_OBJ[@]}"; do
         #   echo "$key"
         # done
