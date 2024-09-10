@@ -22,7 +22,7 @@ runs:
       shell: bash
       if: ${{ inputs.service_name == 'SERVER' }}
       run: |
-        echo "Deploying Server"
+        echo "Deploying Server on ${{ env.APP_ENV }}"
 
     - name: Deploy Service 02
       shell: bash
