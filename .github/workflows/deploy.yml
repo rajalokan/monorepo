@@ -61,6 +61,8 @@ jobs:
 
       - name: Deploy service
         uses: ./.github/actions/deploy-service
+        with:
+          service_name: ${{ inputs.service }}
         
       # # - name: Set up common environment variables
       # #   uses: ./.github/actions/setup-env
