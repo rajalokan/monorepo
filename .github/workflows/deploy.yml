@@ -3,13 +3,16 @@ name: Server
 on:
   workflow_call:
     inputs:
+      service:
+        required: true
+        type: string
       environment:
         required: true
         type: string
 
 jobs:
   deploy:
-    name: Deploy
+    name: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment }}
@@ -30,19 +33,15 @@ jobs:
         env:
           ENV_VARS: ${{ toJSON(vars) }}
         run: |
-          echo ${ENV_VARS}     
+          echo ${ENV_VARS}
 
-      - name: Stringfy
+      - name: Stringify env variables
         id: stringify
         env:
           ENV_VARS: ${{ toJSON(vars) }}
         run: |
           echo ${ENV_VARS} | jq -R
-          echo "vars_json=$(echo ${ENV_VARS} | jq -R)" >> "$GITHUB_OUTPUT"
-
-      - name: Read
-        run: |
-          echo ${{ steps.stringify.outputs.vars_json }}
+          echo "vars_json=$(echo ${ENV_VARS} | jq -R)" >> "$GITHUB_OUTPUT"                
           
       - name: Set up service level environment variables
         uses: ./.github/actions/setup-env
@@ -56,9 +55,12 @@ jobs:
         run: |
           echo ${ENV_VARS}
 
-      - name: Echo
+      - name: Configure AWS credentials
         run: |
           echo ${{ env.AWS_ACCOUNT_ID }}
+
+      - name: Deploy service
+        uses: ./.github/actions/deploy_${{ inputs.service }}
 
       # # - name: Set up common environment variables
       # #   uses: ./.github/actions/setup-env
