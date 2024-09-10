@@ -28,8 +28,9 @@ on:
 jobs:
   server:
     name: Server
-    uses: ./.github/workflows/deploy-server.yml
+    uses: ./.github/workflows/deploy.yml
     with:
+      service: SERVER
       environment: ${{ inputs.environment }}
 
   # reporting:
