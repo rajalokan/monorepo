@@ -7,54 +7,77 @@ inputs:
     description: 'Name of the service'
     required: true
     
-#   with:
-#     description: 'JSON-ified `inputs` for the action, e.g. `{"node-version": "18"}`'
-#     required: false
-#     default: "{}"
-# outputs:
-#   outputs:
-#     description: 'JSON-ified `outputs` from the action, e.g. `{"node-version": "v18.12.0", "cache-hit": true}`'
-#     value: ${{ steps.run.outputs.outputs }}
 runs:
   using: composite
   steps:
-    - name: Deploy Service 01
+    - name: Audit -- Deploy Audit service 01
       shell: bash
-      if: ${{ inputs.service_name == 'SERVER' }}
+      if: ${{ inputs.service_name == 'AUDIT' }}
       run: |
-        echo "Deploying Server on ${{ env.APP_ENV }}"
+        echo "Building Audit service on ${{ env.APP_ENV }}"
 
-    - name: Deploy Service 02
+    - name: Audit -- Deploy Audit service 02
       shell: bash
-      if: ${{ inputs.service_name == 'service_02' }}
+      if: ${{ inputs.service_name == 'AUDIT' }}
       run: |
-        echo "Deploying service 02"        
+        echo "Publishing Audit service on ${{ env.APP_ENV }}"
 
-    - name: Deploy Service 03
+    - name: Backup -- Deploy Backup service 01
       shell: bash
-      if: ${{ inputs.service_name == 'service_03' }}
+      if: ${{ inputs.service_name == 'BACKUP' }}
       run: |
-        echo "Deploying service 03"
-        
-    #     mkdir -p ./.tmp-dynamic-uses &&
-    #     cat <<'DYNAMIC_USES_EOF' >./.tmp-dynamic-uses/action.yml
-    #     outputs:
-    #       outputs:
-    #         value: ${{ '$' }}{{ toJSON(steps.run.outputs) }}
-    #     runs:
-    #       using: composite
-    #       steps:
-    #       - run: rm -rf ./.tmp-dynamic-uses
-    #         shell: sh
-    #       - name: Run
-    #         id: run
-    #         uses: ${{ inputs.uses }}
-    #         with: ${{ inputs.with || '{}' }}
-    #     DYNAMIC_USES_EOF
-    # - name: Run
-    #   id: run
-    #   uses: ./.tmp-dynamic-uses
-    # - name: Cleanup
-    #   if: always() && steps.run.outcome != 'success'
-    #   shell: bash
-    #   run: rm -rf ./.tmp-dynamic-uses
+        echo "Building Audit service on ${{ env.APP_ENV }}"
+
+    - name: Backup -- Deploy Backup service 02
+      shell: bash
+      if: ${{ inputs.service_name == 'BACKUP' }}
+      run: |
+        echo "Publishing Audit service on ${{ env.APP_ENV }}"
+
+    - name: API -- Deploy API service 01
+      shell: bash
+      if: ${{ inputs.service_name == 'API' }}
+      run: |
+        echo "Building API service on ${{ env.APP_ENV }}"
+
+    - name: API -- Deploy API service 01
+      shell: bash
+      if: ${{ inputs.service_name == 'API' }}
+      run: |
+        echo "Publishing API service on ${{ env.APP_ENV }}"  
+
+    - name: Database -- Deploy Database service 01
+      shell: bash
+      if: ${{ inputs.service_name == 'DATABASE' }}
+      run: |
+        echo "Building Database service on ${{ env.APP_ENV }}"
+    
+    - name: Database -- Deploy Database service 01
+      shell: bash
+      if: ${{ inputs.service_name == 'DATABASE' }}
+      run: |
+        echo "Publishing Database service on ${{ env.APP_ENV }}" 
+
+    - name: Notification -- Deploy Notification service 01
+      shell: bash
+      if: ${{ inputs.service_name == 'NOTIFICATION' }}
+      run: |
+        echo "Building Notification service on ${{ env.APP_ENV }}"        
+    
+    - name: Notification -- Deploy Notification service 01
+      shell: bash
+      if: ${{ inputs.service_name == 'NOTIFICATION' }}
+      run: |
+        echo "Publishing Notification service on ${{ env.APP_ENV }}"
+
+    - name: Reporting -- Deploy Reporting service 01
+      shell: bash
+      if: ${{ inputs.service_name == 'REPORTING' }}
+      run: |
+        echo "Building Reporting service on ${{ env.APP_ENV }}"
+
+    - name: Reporting -- Deploy Reporting service 01
+      shell: bash
+      if: ${{ inputs.service_name == 'REPORTING' }}
+      run: |
+        echo "Publishing Reporting service on ${{ env.APP_ENV }}"
