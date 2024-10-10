@@ -1,0 +1,18 @@
+name: CI
+ 
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: "Deploy"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install
+        run: | 
+          echo ${{ github.event_name }}
+      - name: Event
+        run: |
+          echo ${{ toJson(github.event) }}
