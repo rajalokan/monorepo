@@ -33,7 +33,7 @@ jobs:
     if: inputs.service == 'All' || inputs.service == 'Audit'
     uses: ./.github/workflows/deploy-individual-service.yml
     with:
-      service: audit
+      service: AUDIT
       environment: ${{ inputs.environment }}
   
   backup:
@@ -41,7 +41,7 @@ jobs:
     if: inputs.service == 'All' || inputs.service == 'Backup'
     uses: ./.github/workflows/deploy-individual-service.yml
     with:
-      service: backup
+      service: BACKUP
       environment: ${{ inputs.environment }}
 
   api:
@@ -49,7 +49,7 @@ jobs:
     if: inputs.service == 'All' || inputs.service == 'API'
     uses: ./.github/workflows/deploy-individual-service.yml
     with:
-      service: api
+      service: API
       environment: ${{ inputs.environment }}
 
   database:
@@ -57,7 +57,7 @@ jobs:
     if: inputs.service == 'All' || inputs.service == 'Database'
     uses: ./.github/workflows/deploy-individual-service.yml
     with:
-      service: database
+      service: DATABASE
       environment: ${{ inputs.environment }}
 
   notification:
@@ -65,7 +65,7 @@ jobs:
     if: inputs.service == 'All' || inputs.service == 'Notification'
     uses: ./.github/workflows/deploy-individual-service.yml
     with:
-      service: notification
+      service: NOTIFICATION
       environment: ${{ inputs.environment }}
       
   reporting:
@@ -73,5 +73,5 @@ jobs:
     if: inputs.service == 'All' || inputs.service == 'Reporting'
     uses: ./.github/workflows/deploy-individual-service.yml
     with:
-      service: reporting
+      service: REPORTING
       environment: ${{ inputs.environment }}
