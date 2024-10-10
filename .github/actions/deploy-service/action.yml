@@ -15,69 +15,81 @@ runs:
       if: ${{ inputs.service_name == 'AUDIT' }}
       run: |
         echo "Building Audit service on ${{ env.APP_ENV }}"
+        echo "------------------------------------------------------------------"
 
     - name: Audit -- Deploy Audit service 02
       shell: bash
       if: ${{ inputs.service_name == 'AUDIT' }}
       run: |
         echo "Publishing Audit service on ${{ env.APP_ENV }}"
+        echo "------------------------------------------------------------------"
 
     - name: Backup -- Deploy Backup service 01
       shell: bash
       if: ${{ inputs.service_name == 'BACKUP' }}
       run: |
         echo "Building Audit service on ${{ env.APP_ENV }}"
+        echo "------------------------------------------------------------------"
 
     - name: Backup -- Deploy Backup service 02
       shell: bash
       if: ${{ inputs.service_name == 'BACKUP' }}
       run: |
         echo "Publishing Audit service on ${{ env.APP_ENV }}"
+        echo "------------------------------------------------------------------"
 
     - name: API -- Deploy API service 01
       shell: bash
       if: ${{ inputs.service_name == 'API' }}
       run: |
         echo "Building API service on ${{ env.APP_ENV }}"
+        echo "------------------------------------------------------------------"
 
     - name: API -- Deploy API service 01
       shell: bash
       if: ${{ inputs.service_name == 'API' }}
       run: |
-        echo "Publishing API service on ${{ env.APP_ENV }}"  
+        echo "Publishing API service on ${{ env.APP_ENV }}"
+        echo "------------------------------------------------------------------"
 
     - name: Database -- Deploy Database service 01
       shell: bash
       if: ${{ inputs.service_name == 'DATABASE' }}
       run: |
         echo "Building Database service on ${{ env.APP_ENV }}"
+        echo "------------------------------------------------------------------"
     
     - name: Database -- Deploy Database service 01
       shell: bash
       if: ${{ inputs.service_name == 'DATABASE' }}
       run: |
-        echo "Publishing Database service on ${{ env.APP_ENV }}" 
+        echo "Publishing Database service on ${{ env.APP_ENV }}"
+        echo "------------------------------------------------------------------"
 
     - name: Notification -- Deploy Notification service 01
       shell: bash
       if: ${{ inputs.service_name == 'NOTIFICATION' }}
       run: |
-        echo "Building Notification service on ${{ env.APP_ENV }}"        
+        echo "Building Notification service on ${{ env.APP_ENV }}"
+        echo "------------------------------------------------------------------"
     
     - name: Notification -- Deploy Notification service 01
       shell: bash
       if: ${{ inputs.service_name == 'NOTIFICATION' }}
       run: |
         echo "Publishing Notification service on ${{ env.APP_ENV }}"
+        echo "------------------------------------------------------------------"
 
     - name: Reporting -- Deploy Reporting service 01
       shell: bash
       if: ${{ inputs.service_name == 'REPORTING' }}
       run: |
         echo "Building Reporting service on ${{ env.APP_ENV }}"
+        echo "------------------------------------------------------------------"
 
     - name: Reporting -- Deploy Reporting service 01
       shell: bash
       if: ${{ inputs.service_name == 'REPORTING' }}
       run: |
         echo "Publishing Reporting service on ${{ env.APP_ENV }}"
+        echo "------------------------------------------------------------------"
