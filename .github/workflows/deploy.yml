@@ -30,42 +30,42 @@ on:
 jobs:
   audit:
     name: Audit
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/deploy-individual-service.yml
     with:
       service: audit
       environment: ${{ inputs.environment }}
   
   backup:
     name: Backup
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/deploy-individual-service.yml
     with:
       service: backup
       environment: ${{ inputs.environment }}
 
   api:
     name: Api
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/deploy-individual-service.yml
     with:
       service: api
       environment: ${{ inputs.environment }}
 
   database:
     name: Database
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/deploy-individual-service.yml
     with:
       service: database
       environment: ${{ inputs.environment }}
 
   notification:
     name: Notification
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/deploy-individual-service.yml
     with:
       service: notification
       environment: ${{ inputs.environment }}
       
   reporting:
     name: Reporting
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/deploy-individual-service.yml
     with:
       service: reporting
       environment: ${{ inputs.environment }}
