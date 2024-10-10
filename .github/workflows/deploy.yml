@@ -4,16 +4,6 @@ run-name: Deploying to ${{ inputs.environment }} by @${{ github.actor }}
 on:
   workflow_dispatch:
     inputs:
-      # project:
-      #   required: true
-      #   type: choice
-      #   description: Choose the project to deploy
-      #   options:
-      #     - server
-      #     - auditing
-      #     - backup
-      #     - reporting
-      #     - notification
       environment:
         required: true
         type: choice
@@ -24,25 +14,58 @@ on:
           - test
           - production
         default: "dev"
+      service:
+        required: true
+        type: choice
+        description: Choose the service to deploy
+        options:
+          - all
+          - audit
+          - backup
+          - api
+          - database
+          - notification
+          - reporting        
 
 jobs:
-  server:
-    name: Server
+  audit:
+    name: Audit
     uses: ./.github/workflows/deploy.yml
     with:
-      service: SERVER
+      service: audit
+      environment: ${{ inputs.environment }}
+  
+  backup:
+    name: Backup
+    uses: ./.github/workflows/deploy.yml
+    with:
+      service: backup
       environment: ${{ inputs.environment }}
 
-  # reporting:
-  #   name: Reporting
-  #   uses: ./.github/workflows/deploy-reporting.yml
-  #   with:
-  #     environment: ${{ inputs.environment }}
-    
-    # steps:
-    #   - name: Checkout Code
-    #     uses: actions/checkout@v4        
+  api:
+    name: Api
+    uses: ./.github/workflows/deploy.yml
+    with:
+      service: api
+      environment: ${{ inputs.environment }}
 
-    #   - name: Deploy
-    #     run: |
-    #       echo "Deploying to ${{ vars.APP_NAME }}-${{ inputs.environment }}"
+  database:
+    name: Database
+    uses: ./.github/workflows/deploy.yml
+    with:
+      service: database
+      environment: ${{ inputs.environment }}
+
+  notification:
+    name: Notification
+    uses: ./.github/workflows/deploy.yml
+    with:
+      service: notification
+      environment: ${{ inputs.environment }}
+      
+  reporting:
+    name: Reporting
+    uses: ./.github/workflows/deploy.yml
+    with:
+      service: reporting
+      environment: ${{ inputs.environment }}
