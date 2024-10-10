@@ -19,17 +19,18 @@ on:
         type: choice
         description: Choose the service to deploy
         options:
-          - all
-          - audit
-          - backup
-          - api
-          - database
-          - notification
-          - reporting        
+          - All
+          - Audit
+          - Backup
+          - API
+          - Database
+          - Notification
+          - Reporting        
 
 jobs:
   audit:
     name: Audit
+    if: inputs.service == 'All' || inputs.service == 'Audit'
     uses: ./.github/workflows/deploy-individual-service.yml
     with:
       service: audit
@@ -37,13 +38,15 @@ jobs:
   
   backup:
     name: Backup
+    if: inputs.service == 'All' || inputs.service == 'Backup'
     uses: ./.github/workflows/deploy-individual-service.yml
     with:
       service: backup
       environment: ${{ inputs.environment }}
 
   api:
-    name: Api
+    name: API
+    if: inputs.service == 'All' || inputs.service == 'API'
     uses: ./.github/workflows/deploy-individual-service.yml
     with:
       service: api
@@ -51,6 +54,7 @@ jobs:
 
   database:
     name: Database
+    if: inputs.service == 'All' || inputs.service == 'Database'
     uses: ./.github/workflows/deploy-individual-service.yml
     with:
       service: database
@@ -58,6 +62,7 @@ jobs:
 
   notification:
     name: Notification
+    if: inputs.service == 'All' || inputs.service == 'Notification'
     uses: ./.github/workflows/deploy-individual-service.yml
     with:
       service: notification
@@ -65,6 +70,7 @@ jobs:
       
   reporting:
     name: Reporting
+    if: inputs.service == 'All' || inputs.service == 'Reporting'
     uses: ./.github/workflows/deploy-individual-service.yml
     with:
       service: reporting
