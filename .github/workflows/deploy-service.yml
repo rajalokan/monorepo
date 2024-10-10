@@ -1,4 +1,4 @@
-name: Server
+name: Deploy Service
 
 on:
   workflow_call:
