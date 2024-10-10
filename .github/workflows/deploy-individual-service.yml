@@ -59,7 +59,7 @@ jobs:
         run: |
           echo ${{ env.AWS_ACCOUNT_ID }}
 
-      - name: Deploy ${{ inputs.service_name }} service
+      - name: Deploy service
         uses: ./.github/actions/deploy-service
         with:
           service_name: ${{ inputs.service_name }}
