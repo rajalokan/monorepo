@@ -3,7 +3,7 @@ name: Deploy Service
 on:
   workflow_call:
     inputs:
-      service:
+      service_name:
         required: true
         type: string
       environment:
@@ -23,17 +23,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4    
 
-      - name: Print all env variables
-        env:
-          ENV_VARS: ${{ toJSON(env) }}
-        run: |
-          echo ${ENV_VARS}
+      # - name: Print all env variables
+      #   env:
+      #     ENV_VARS: ${{ toJSON(env) }}
+      #   run: |
+      #     echo ${ENV_VARS}
 
-      - name: Print all vars
-        env:
-          ENV_VARS: ${{ toJSON(vars) }}
-        run: |
-          echo ${ENV_VARS}
+      # - name: Print all vars
+      #   env:
+      #     ENV_VARS: ${{ toJSON(vars) }}
+      #   run: |
+      #     echo ${ENV_VARS}
 
       - name: Stringify env variables
         id: stringify
@@ -47,7 +47,7 @@ jobs:
         uses: ./.github/actions/setup-env
         with:
           vars_json: ${{ steps.stringify.outputs.vars_json }}
-          service_name: SERVER        
+          service_name: ${{ inputs.service_name }}        
           
       - name: Print all env variables
         env:
@@ -62,7 +62,7 @@ jobs:
       - name: Deploy service
         uses: ./.github/actions/deploy-service
         with:
-          service_name: ${{ inputs.service }}
+          service_name: ${{ inputs.service_name }}
         
       # # - name: Set up common environment variables
       # #   uses: ./.github/actions/setup-env
