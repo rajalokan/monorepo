@@ -31,47 +31,53 @@ jobs:
   audit:
     name: Audit
     if: inputs.service == 'All' || inputs.service == 'Audit'
-    uses: ./.github/workflows/deploy-individual-service.yml
+    uses: ./.github/workflows/deploy-audit-service.yml
     with:
       service_name: AUDIT
       environment: ${{ inputs.environment }}
+      tag_name: ${{ inputs.tag_name || github.sha }}
   
   backup:
     name: Backup
     if: inputs.service == 'All' || inputs.service == 'Backup'
-    uses: ./.github/workflows/deploy-individual-service.yml
+    uses: ./.github/workflows/deploy-backup-service.yml
     with:
       service_name: BACKUP
       environment: ${{ inputs.environment }}
+      tag_name: ${{ inputs.tag_name || github.sha }}
 
   api:
     name: API
     if: inputs.service == 'All' || inputs.service == 'API'
-    uses: ./.github/workflows/deploy-individual-service.yml
+    uses: ./.github/workflows/deploy-api-service.yml
     with:
       service_name: API
       environment: ${{ inputs.environment }}
+      tag_name: ${{ inputs.tag_name || github.sha }}
 
   database:
     name: Database
     if: inputs.service == 'All' || inputs.service == 'Database'
-    uses: ./.github/workflows/deploy-individual-service.yml
+    uses: ./.github/workflows/deploy-database.yml
     with:
       service_name: DATABASE
       environment: ${{ inputs.environment }}
+      tag_name: ${{ inputs.tag_name || github.sha }}
 
   notification:
     name: Notification
     if: inputs.service == 'All' || inputs.service == 'Notification'
-    uses: ./.github/workflows/deploy-individual-service.yml
+    uses: ./.github/workflows/deploy-notification-service.yml
     with:
       service_name: NOTIFICATION
       environment: ${{ inputs.environment }}
+      tag_name: ${{ inputs.tag_name || github.sha }}
       
   reporting:
     name: Reporting
     if: inputs.service == 'All' || inputs.service == 'Reporting'
-    uses: ./.github/workflows/deploy-individual-service.yml
+    uses: ./.github/workflows/deploy-reporting-service.yml
     with:
       service_name: REPORTING
       environment: ${{ inputs.environment }}
+      tag_name: ${{ inputs.tag_name || github.sha }}
