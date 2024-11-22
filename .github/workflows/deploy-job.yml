@@ -10,6 +10,7 @@ on:
       service:
         required: true
         type: string
+        default: All
       tag_name:
         required: false
         type: string
