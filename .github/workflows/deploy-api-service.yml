@@ -1,0 +1,47 @@
+name: Deploy Backup Service
+
+on:
+  workflow_call:
+    inputs:
+      service_name:
+        required: true
+        type: string
+      environment:
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    name: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4          
+
+      - name: Stringify env variables
+        id: stringify
+        env:
+          ENV_VARS: ${{ toJSON(vars) }}
+        run: |
+          echo ${ENV_VARS} | jq -R
+          echo "vars_json=$(echo ${ENV_VARS} | jq -R)" >> "$GITHUB_OUTPUT"                
+          
+      - name: Set up service level environment variables
+        uses: ./.github/actions/setup-env
+        with:
+          vars_json: ${{ steps.stringify.outputs.vars_json }}
+          service_name: ${{ inputs.service_name }}              
+
+      - name: Configure AWS credentials
+        run: |
+          echo ${{ env.AWS_ACCOUNT_ID }}
+
+      - name: Deploy service      
+        run:
+          echo "Deploying Backup service"
+          
