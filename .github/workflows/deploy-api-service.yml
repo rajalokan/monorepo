@@ -15,7 +15,7 @@ on:
 
 jobs:
   deploy:
-    name: Audit ${{ inputs.environment }}
+    name: API ${{ inputs.environment }}
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.environment }}
