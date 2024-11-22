@@ -1,4 +1,4 @@
-name: Deploy
+name: Deploy Job
 run-name: Deploying ${{ inputs.service }} service(s) to ${{ inputs.environment }} by @${{ github.actor }}
 
 on:
